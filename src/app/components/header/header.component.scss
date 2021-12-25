@@ -5,6 +5,7 @@ header {
     gap: 2rem;
 
     padding-block: var(--shell--padding);
+    padding-inline: var(--full-width-padding-inline);
 
     border-bottom: 1px solid var(--color--separator);
 
@@ -55,6 +56,36 @@ header {
         &:hover {
             &::before {
                 background-color: var(--color--default-foreground);
+            }
+        }
+    }
+
+    &.minimal {
+        position: fixed;
+        bottom: var(--shell--padding);
+        left: var(--shell--padding);
+        z-index: 1;
+
+        border: none;
+
+        padding: 0;
+
+        .icon-wrapper {
+            color: var(--color--default-background);
+
+            font-size: 2.4rem;
+
+            &::before {
+                background-color: var(--color--default-foreground);
+                opacity: 1;
+            }
+
+            &:hover {
+                color: var(--color--default-foreground);
+
+                &::before {
+                    background-color: var(--color--default-background);
+                }
             }
         }
     }

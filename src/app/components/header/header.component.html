@@ -1,10 +1,20 @@
-<header>
-    <div class="logo">
-        <a routerLinkActive="active" routerLink="/">Flip</a>
-    </div>
+<ng-container *ngIf="isInHome">
+    <header>
+        <div class="logo">
+            <a routerLinkActive="active" routerLink="/">Intersection Observer</a>
+        </div>
 
-    <div class="icon-wrapper" (click)="themeService.toggleTheme()">
-        <icon-dark-mode class="icon" *ngIf="themeService.theme === Theme.LIGHT"></icon-dark-mode>
-        <icon-light-mode class="icon" *ngIf="themeService.theme === Theme.DARK"></icon-light-mode>
-    </div>
-</header>
+        <div class="icon-wrapper" (click)="themeService.toggleTheme()">
+            <icon-dark-mode class="icon" *ngIf="themeService.theme === Theme.LIGHT"></icon-dark-mode>
+            <icon-light-mode class="icon" *ngIf="themeService.theme === Theme.DARK"></icon-light-mode>
+        </div>
+    </header>
+</ng-container>
+
+<ng-container *ngIf="!isInHome">
+    <header class="minimal">
+        <a class="icon-wrapper" routerLink="/">
+            <icon-home></icon-home>
+        </a>
+    </header>
+</ng-container>

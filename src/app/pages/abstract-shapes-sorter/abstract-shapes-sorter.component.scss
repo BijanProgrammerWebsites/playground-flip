@@ -1,0 +1,67 @@
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    .shapes {
+        display: flex;
+        flex-wrap: wrap;
+	    align-items: center;
+        gap: 2rem;
+
+        .shape {
+            display: grid;
+            place-items: center;
+
+            width: 8rem;
+            aspect-ratio: 1 / 1;
+
+            font-size: 2.4rem;
+
+            &.SQUARE {
+            }
+
+            &.CIRCLE {
+                border-radius: 999rem;
+            }
+
+            &.RED {
+                background-color: hsl(0, 90%, 40%);
+	            color: hsl(0, 0%, 98%);
+            }
+
+            &.ORANGE {
+                background-color: hsl(36, 100%, 50%);
+                color: hsl(0, 0%, 10%);
+            }
+
+            &.YELLOW {
+                background-color: hsl(60, 100%, 50%);
+                color: hsl(0, 0%, 10%);
+            }
+
+            &.GREEN {
+                background-color: hsl(120, 100%, 50%);
+	            color: hsl(0, 0%, 10%);
+            }
+
+            &.CYAN {
+                background-color: hsl(180, 100%, 50%);
+                color: hsl(0, 0%, 10%);
+            }
+
+            &.BLUE {
+                background-color: hsl(220, 90%, 50%);
+                color: hsl(0, 0%, 98%);
+            }
+
+            &.PURPLE {
+                background-color: hsl(270, 100%, 50%);
+                color: hsl(0, 0%, 98%);
+            }
+        }
+    }
+
+    .buttons {
+    }
+}

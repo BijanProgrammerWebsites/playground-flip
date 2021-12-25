@@ -1,0 +1,9 @@
+<div #body class="body">
+    <div class="buttons">
+        <button (click)="randomButtonClickHandler()">Random</button>
+    </div>
+
+    <div class="shapes">
+        <div *ngFor="let shape of shapes" class="shape" [ngClass]="[shape.variant, shape.color]">{{ shape.value }}</div>
+    </div>
+</div>

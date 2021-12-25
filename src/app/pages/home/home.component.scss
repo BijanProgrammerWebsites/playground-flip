@@ -1,0 +1,37 @@
+.wrapper {
+    --gap: 2rem;
+
+    padding-block: var(--shell--padding);
+
+    nav {
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+
+            li {
+                flex-grow: 1;
+
+                a {
+                    color: var(--color--default-foreground);
+                    box-shadow: var(--box-shadow--subtle);
+
+                    display: block;
+
+                    padding: 2rem;
+
+                    font-size: 3.6rem;
+                    font-weight: 700;
+                    text-align: center;
+
+                    &:hover {
+                        --outline-size: 4px;
+
+                        background-color: var(--color--primary);
+                        color: var(--color--primary-opposite);
+                    }
+                }
+            }
+        }
+    }
+}
