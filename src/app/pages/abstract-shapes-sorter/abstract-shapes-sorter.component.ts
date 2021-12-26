@@ -35,6 +35,9 @@ export class AbstractShapesSorterComponent {
 
     public shapes!: Shape[];
 
+    private isPlaying: boolean = false;
+    private endedTransitionsCount: number = 0;
+
     public constructor(private changeDetectorRef: ChangeDetectorRef) {
         this.initShapes();
     }
@@ -64,6 +67,11 @@ export class AbstractShapesSorterComponent {
     }
 
     private flip(callback: Function): void {
+        if (this.isPlaying) return;
+
+        this.isPlaying = true;
+        this.endedTransitionsCount = 0;
+
         const first = this.getBoundingClientRects();
 
         callback();
@@ -104,13 +112,15 @@ export class AbstractShapesSorterComponent {
         elements.forEach((element, i) => {
             const {value} = this.shapes[i];
 
-            element.animate(
+            const animation = element.animate(
                 [{transform: `translate(${invert[value].x}px, ${invert[value].y}px)`}, {transform: 'translate(0)'}],
                 {
                     duration: AbstractShapesSorterComponent.ANIMATION_DURATION,
                     easing: AbstractShapesSorterComponent.EASING,
                 }
             );
+
+            animation.addEventListener('finish', this.transitionEnd.bind(this));
         });
     }
 
@@ -123,6 +133,11 @@ export class AbstractShapesSorterComponent {
         });
 
         return result;
+    }
+
+    private transitionEnd(): void {
+        this.endedTransitionsCount++;
+        if (this.endedTransitionsCount === AbstractShapesSorterComponent.SHAPES_COUNT) this.isPlaying = false;
     }
 
     private shapeElements(): HTMLElement[] {
