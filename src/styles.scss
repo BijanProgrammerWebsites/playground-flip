@@ -193,8 +193,6 @@ body {
     color: var(--color--body-foreground);
 
     width: 100%;
-	
-	padding-inline: var(--full-width-padding-inline);
 
     font-size: 1.6rem;
 }
@@ -203,4 +201,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--gap, 4rem);
+	
+	padding-inline: var(--full-width-padding-inline);
 }

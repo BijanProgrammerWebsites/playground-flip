@@ -1,0 +1,23 @@
+<div #body class="body">
+    <div class="box">
+        <div #top class="top">
+            <ng-container *ngFor="let word of topWords">
+                <button [attr.data-id]="word.id" (click)="buttonClickHandler($event)">
+                    {{ word.content }}
+                </button>
+            </ng-container>
+        </div>
+
+        <div #bottom class="bottom">
+            <ng-container *ngFor="let word of words">
+                <button
+                    [ngClass]="{hidden: !word.isVisible}"
+                    [attr.data-id]="word.id"
+                    (click)="buttonClickHandler($event)"
+                >
+                    {{ word.content }}
+                </button>
+            </ng-container>
+        </div>
+    </div>
+</div>

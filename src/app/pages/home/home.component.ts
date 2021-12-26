@@ -6,5 +6,8 @@ import {Component} from '@angular/core';
     styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-    public demos: {title: string; link: string}[] = [{title: 'Abstract Shapes Sorter', link: 'abstract-shapes-sorter'}];
+    public demos: {title: string; link: string}[] = [
+        {title: 'Abstract Shapes Sorter', link: 'abstract-shapes-sorter'},
+        {title: 'Duolingo Word puzzle', link: 'duolingo-word-puzzle'},
+    ];
 }

@@ -1,0 +1,62 @@
+:host {
+    flex: 1;
+
+    height: 0;
+
+    .body {
+        --hue: 200;
+        --color--dark: hsl(var(--hue), 100%, 10%);
+        --color--midtone: hsl(var(--hue), 100%, 14%);
+        --color--light: hsl(var(--hue), 100%, 90%);
+        --color--disabled: hsl(var(--hue), 100%, 20%);
+
+        background-color: var(--color--midtone);
+        color: var(--color--light);
+
+        display: grid;
+        place-items: center;
+
+        height: 100%;
+
+        .box {
+            width: 40rem;
+
+            padding: 2rem;
+
+            border: 2px solid var(--color--dark);
+
+            .top,
+            .bottom {
+                display: flex;
+                align-items: flex-start;
+                gap: 1rem;
+
+                button {
+                    background-color: var(--color--dark);
+                    color: var(--color--light);
+
+                    padding: 0.5rem 1rem;
+
+                    border-radius: 0.3rem;
+	                
+                    &.hidden {
+                        background-color: var(--color--disabled);
+	                    color: transparent;
+
+                        cursor: inherit;
+	                    
+	                    pointer-events: none;
+	                    user-select: none;
+                    }
+                }
+            }
+
+            .top {
+                min-height: 20rem;
+            }
+
+            .bottom {
+            }
+        }
+    }
+}

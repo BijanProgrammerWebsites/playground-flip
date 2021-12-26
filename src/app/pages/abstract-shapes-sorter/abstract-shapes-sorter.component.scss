@@ -3,6 +3,9 @@
     flex-direction: column;
     gap: 4rem;
 
+    padding-inline: var(--full-width-padding-inline);
+    padding-block: var(--shell--padding);
+
     section {
         display: flex;
         flex-direction: column;

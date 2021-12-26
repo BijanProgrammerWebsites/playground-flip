@@ -3,11 +3,12 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
-
+	
+	padding-inline: var(--full-width-padding-inline);
     padding-block: var(--shell--padding);
 
     border-bottom: 1px solid var(--color--separator);
-
+	
     user-select: none;
 
     .logo {

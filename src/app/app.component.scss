@@ -7,8 +7,9 @@
     margin: auto;
 
     main {
-        flex: 1;
-
-        padding-block: var(--shell--padding);
+        flex: 1 1 0;
+	
+	    display: flex;
+	    flex-direction: column;
     }
 }
