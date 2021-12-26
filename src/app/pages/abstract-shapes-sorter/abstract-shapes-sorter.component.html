@@ -1,9 +1,20 @@
 <div #body class="body">
-    <div class="buttons">
-        <button (click)="randomButtonClickHandler()">Random</button>
-    </div>
+    <section>
+        <h2>Sort by:</h2>
+        <div class="buttons">
+            <button (click)="valueButtonClickHandler()">Value</button>
+            <button (click)="shapeButtonClickHandler()">Shape</button>
+            <button (click)="colorButtonClickHandler()">Color</button>
+            <button (click)="randomButtonClickHandler()">Random</button>
+        </div>
+    </section>
 
-    <div class="shapes">
-        <div *ngFor="let shape of shapes" class="shape" [ngClass]="[shape.variant, shape.color]">{{ shape.value }}</div>
-    </div>
+    <section>
+        <h2>Shapes:</h2>
+        <div class="shapes">
+            <div *ngFor="let shape of shapes" class="shape" [ngClass]="[shape.variant, shape.color]">
+                {{ shape.value }}
+            </div>
+        </div>
+    </section>
 </div>

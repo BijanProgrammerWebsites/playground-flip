@@ -39,10 +39,34 @@ export class AbstractShapesSorterComponent {
         this.initShapes();
     }
 
+    public valueButtonClickHandler(): void {
+        this.flip(() => {
+            this.shapes.sort((a, b) => a.value - b.value);
+        });
+    }
+
+    public shapeButtonClickHandler(): void {
+        this.flip(() => {
+            this.shapes.sort((a, b) => a.variant.toString().localeCompare(b.variant.toString()));
+        });
+    }
+
+    public colorButtonClickHandler(): void {
+        this.flip(() => {
+            this.shapes.sort((a, b) => a.color.toString().localeCompare(b.color.toString()));
+        });
+    }
+
     public randomButtonClickHandler(): void {
+        this.flip(() => {
+            this.shapes.sort(() => Math.random() - 0.5);
+        });
+    }
+
+    private flip(callback: Function): void {
         const first = this.getBoundingClientRects();
 
-        this.randomizeShapes();
+        callback();
         this.changeDetectorRef.detectChanges();
 
         const last = this.getBoundingClientRects();
@@ -99,17 +123,6 @@ export class AbstractShapesSorterComponent {
         });
 
         return result;
-    }
-
-    private randomizeShapes(): void {
-        for (let i = 0; i < 100; i++) {
-            const firstIndex = AbstractShapesSorterComponent.generateRandomIndex();
-            const secondIndex = AbstractShapesSorterComponent.generateRandomIndex();
-
-            const temp = this.shapes[firstIndex];
-            this.shapes[firstIndex] = this.shapes[secondIndex];
-            this.shapes[secondIndex] = temp;
-        }
     }
 
     private shapeElements(): HTMLElement[] {

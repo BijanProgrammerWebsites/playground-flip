@@ -3,65 +3,85 @@
     flex-direction: column;
     gap: 4rem;
 
-    .shapes {
+    section {
         display: flex;
-        flex-wrap: wrap;
-	    align-items: center;
-        gap: 2rem;
+        flex-direction: column;
+        gap: 1rem;
 
-        .shape {
-            display: grid;
-            place-items: center;
+        .shapes {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
 
-            width: 8rem;
-            aspect-ratio: 1 / 1;
+            .shape {
+                display: grid;
+                place-items: center;
 
-            font-size: 2.4rem;
+                width: 8rem;
+                aspect-ratio: 1 / 1;
 
-            &.SQUARE {
-            }
+                font-size: 2.4rem;
 
-            &.CIRCLE {
-                border-radius: 999rem;
-            }
+                &.SQUARE {
+                }
 
-            &.RED {
-                background-color: hsl(0, 90%, 40%);
-	            color: hsl(0, 0%, 98%);
-            }
+                &.CIRCLE {
+                    border-radius: 999rem;
+                }
 
-            &.ORANGE {
-                background-color: hsl(36, 100%, 50%);
-                color: hsl(0, 0%, 10%);
-            }
+                &.RED {
+                    background-color: hsl(0, 90%, 40%);
+                    color: hsl(0, 0%, 98%);
+                }
 
-            &.YELLOW {
-                background-color: hsl(60, 100%, 50%);
-                color: hsl(0, 0%, 10%);
-            }
+                &.ORANGE {
+                    background-color: hsl(36, 100%, 50%);
+                    color: hsl(0, 0%, 10%);
+                }
 
-            &.GREEN {
-                background-color: hsl(120, 100%, 50%);
-	            color: hsl(0, 0%, 10%);
-            }
+                &.YELLOW {
+                    background-color: hsl(60, 100%, 50%);
+                    color: hsl(0, 0%, 10%);
+                }
 
-            &.CYAN {
-                background-color: hsl(180, 100%, 50%);
-                color: hsl(0, 0%, 10%);
-            }
+                &.GREEN {
+                    background-color: hsl(120, 100%, 60%);
+                    color: hsl(0, 0%, 10%);
+                }
 
-            &.BLUE {
-                background-color: hsl(220, 90%, 50%);
-                color: hsl(0, 0%, 98%);
-            }
+                &.CYAN {
+                    background-color: hsl(180, 100%, 50%);
+                    color: hsl(0, 0%, 10%);
+                }
 
-            &.PURPLE {
-                background-color: hsl(270, 100%, 50%);
-                color: hsl(0, 0%, 98%);
+                &.BLUE {
+                    background-color: hsl(220, 90%, 50%);
+                    color: hsl(0, 0%, 98%);
+                }
+
+                &.PURPLE {
+                    background-color: hsl(270, 100%, 50%);
+                    color: hsl(0, 0%, 98%);
+                }
             }
         }
-    }
 
-    .buttons {
+        .buttons {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+
+            button {
+                background-color: var(--color--primary);
+                color: var(--color--primary-opposite);
+
+                &:active,
+                &:focus {
+                    background-color: var(--color--secondary);
+                    color: var(--color--secondary-opposite);
+                }
+            }
+        }
     }
 }
