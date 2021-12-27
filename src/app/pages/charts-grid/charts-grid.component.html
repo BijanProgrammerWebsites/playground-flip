@@ -1,6 +1,8 @@
 <div #body class="body">
+    <h1>Charts Grid</h1>
+
     <div class="charts">
-        <div class="bar">
+        <div class="bar" (click)="chartClickHandler('bar')">
             <h2>Bar</h2>
             <div class="content">
                 <div class="piece"></div>
@@ -10,21 +12,21 @@
                 <div class="piece"></div>
             </div>
         </div>
-        <div class="card card--1">
+        <div class="card card--1" (click)="chartClickHandler('card--1')">
             <h2>Card 1</h2>
             <div class="content">
                 <div class="value">23</div>
                 <div class="unit">unit or caption</div>
             </div>
         </div>
-        <div class="card card--2">
+        <div class="card card--2" (click)="chartClickHandler('card--2')">
             <h2>Card 2</h2>
             <div class="content">
                 <div class="value">815</div>
                 <div class="unit">unit or caption</div>
             </div>
         </div>
-        <div class="column">
+        <div class="column" (click)="chartClickHandler('column')">
             <h2>Column</h2>
             <div class="content">
                 <div class="piece"></div>
@@ -36,13 +38,13 @@
                 <div class="piece"></div>
             </div>
         </div>
-        <div class="pie pie--1">
+        <div class="pie pie--1" (click)="chartClickHandler('pie--1')">
             <h2>Pie 1</h2>
             <div class="content">
                 <div class="gradient"></div>
             </div>
         </div>
-        <div class="pie pie--2">
+        <div class="pie pie--2" (click)="chartClickHandler('pie--2')">
             <h2>Pie 2</h2>
             <div class="content">
                 <div class="gradient"></div>

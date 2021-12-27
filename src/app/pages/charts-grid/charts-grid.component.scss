@@ -7,6 +7,7 @@
         --hue: 200;
         --color--body-background: hsl(var(--hue), 60%, 5%);
         --color--chart-background: hsl(var(--hue), 60%, 10%);
+        --color--chart-background--hover: hsl(var(--hue), 60%, 14%);
         --color--chart-foreground: hsl(var(--hue), 60%, 90%);
         --color--card-unit-foreground: hsl(var(--hue), 60%, 90%);
         --color--column-foreground: hsl(var(--hue), 60%, 50%);
@@ -18,142 +19,20 @@
 
         background-color: var(--color--body-background);
         color: var(--color--chart-foreground);
-
+	
+	    display: flex;
+	    flex-direction: column;
+	    gap: 4rem;
+	    
         height: 100%;
 
         padding: var(--shell--padding) var(--full-width-padding-inline);
 
-        &.bar {
-            .charts {
-                grid-template-areas:
-                    'bar bar column'
-                    'bar bar card--1'
-                    'pie--1 pie--2 card--2';
-
-                .bar {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        font-size: 4.8rem;
-
-                        .piece {
-                            background-color: var(--color--column-foreground);
-                        }
-                    }
-                }
-            }
-        }
-
-        &.card--1 {
-            .charts {
-                grid-template-areas:
-                    'card--1 card--1 card--1 card--1 card--2 card--2'
-                    'card--1 card--1 card--1 card--1 pie--1  pie--1'
-                    'card--1 card--1 card--1 card--1 pie--2  pie--2'
-                    'bar     bar     bar     column  column  column';
-
-                .card--1 {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        font-size: 3.6rem;
-                    }
-                }
-            }
-        }
-
-        &.card--2 {
-            .charts {
-                grid-template-areas:
-                    'card--2 card--2 card--2 card--2 card--1 card--1'
-                    'card--2 card--2 card--2 card--2 pie--1  pie--1'
-                    'card--2 card--2 card--2 card--2 pie--2  pie--2'
-                    'bar     bar     bar     column  column  column';
-
-                .card--2 {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        font-size: 3.6rem;
-                    }
-                }
-            }
-        }
-
-        &.column {
-            .charts {
-                grid-template-areas:
-                    'column column bar'
-                    'column column card--1'
-                    'pie--1 pie--2 card--2';
-
-                .column {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        font-size: 4.8rem;
-
-                        .piece {
-                            background-color: var(--color--column-foreground);
-                        }
-                    }
-                }
-            }
-        }
-
-        &.pie--1 {
-            .charts {
-                grid-template-areas:
-                    'pie--1 pie--1 pie--1 pie--1 pie--2  pie--2'
-                    'pie--1 pie--1 pie--1 pie--1 card--1 card--1'
-                    'pie--1 pie--1 pie--1 pie--1 card--2 card--2'
-                    'bar    bar    bar    column column  column';
-
-                .pie--1 {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        width: 36rem;
-                    }
-                }
-            }
-        }
-
-        &.pie--2 {
-            .charts {
-                grid-template-areas:
-                    'pie--2 pie--2 pie--2 pie--2 pie--1  pie--1'
-                    'pie--2 pie--2 pie--2 pie--2 card--1 card--1'
-                    'pie--2 pie--2 pie--2 pie--2 card--2 card--2'
-                    'bar    bar    bar    column column  column';
-
-                .pie--2 {
-                    h2 {
-                        --font-size--heading: 4.8rem;
-                    }
-
-                    .content {
-                        width: 36rem;
-                    }
-                }
-            }
-        }
-
         .charts {
             display: grid;
             grid-template-areas:
-                'bar card--1 card--2'
-                'column pie--1 pie--2';
+                "bar card--1 card--2"
+                "column pie--1 pie--2";
             gap: 2rem;
 
             > * {
@@ -167,12 +46,20 @@
 
                 border-radius: 0.3rem;
 
+                transform-origin: top left;
+
+                cursor: pointer;
+
                 h2 {
                     font-size: var(--font-size--heading, 1.8rem);
                 }
 
                 .content {
                     flex: 1;
+                }
+
+                &:hover {
+                    background-color: var(--color--chart-background--hover);
                 }
             }
 
@@ -188,7 +75,7 @@
 
                     height: 100%;
 
-                    font-size: 0.8rem;
+                    font-size: 1.8rem;
 
                     .piece {
                         flex: 1;
@@ -297,9 +184,11 @@
 
             .pie {
                 .content {
+	                flex: unset;
+	                
                     width: 4.8rem;
-                    aspect-ratio: 1 / 1;
-
+                    height: 4.8rem;
+	                
                     border-radius: 999rem;
                 }
 
@@ -330,6 +219,134 @@
                             var(--color--pie-piece--3) 270deg,
                             var(--color--pie-piece--4) 270deg
                         );
+                    }
+                }
+            }
+        }
+
+        &.bar {
+            .charts {
+                grid-template-areas:
+                    "bar bar column"
+                    "bar bar card--1"
+                    "pie--1 pie--2 card--2";
+
+                .bar {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        font-size: 4.8rem;
+
+                        .piece {
+                            background-color: var(--color--column-foreground);
+                        }
+                    }
+                }
+            }
+        }
+
+        &.card--1 {
+            .charts {
+                grid-template-areas:
+                    "card--1 card--1 card--1 card--1 card--2 card--2"
+                    "card--1 card--1 card--1 card--1 pie--1  pie--1"
+                    "card--1 card--1 card--1 card--1 pie--2  pie--2"
+                    "bar     bar     bar     column  column  column";
+
+                .card--1 {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        font-size: 3.6rem;
+                    }
+                }
+            }
+        }
+
+        &.card--2 {
+            .charts {
+                grid-template-areas:
+                    "card--2 card--2 card--2 card--2 card--1 card--1"
+                    "card--2 card--2 card--2 card--2 pie--1  pie--1"
+                    "card--2 card--2 card--2 card--2 pie--2  pie--2"
+                    "bar     bar     bar     column  column  column";
+
+                .card--2 {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        font-size: 3.6rem;
+                    }
+                }
+            }
+        }
+
+        &.column {
+            .charts {
+                grid-template-areas:
+                    "column column bar"
+                    "column column card--1"
+                    "pie--1 pie--2 card--2";
+
+                .column {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        font-size: 4.8rem;
+
+                        .piece {
+                            background-color: var(--color--column-foreground);
+                        }
+                    }
+                }
+            }
+        }
+
+        &.pie--1 {
+            .charts {
+                grid-template-areas:
+                    "pie--1 pie--1 pie--1 pie--1 pie--2  pie--2"
+                    "pie--1 pie--1 pie--1 pie--1 card--1 card--1"
+                    "pie--1 pie--1 pie--1 pie--1 card--2 card--2"
+                    "bar    bar    bar    column column  column";
+
+                .pie--1 {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        width: 36rem;
+	                    height: 36rem;
+                    }
+                }
+            }
+        }
+
+        &.pie--2 {
+            .charts {
+                grid-template-areas:
+                    "pie--2 pie--2 pie--2 pie--2 pie--1  pie--1"
+                    "pie--2 pie--2 pie--2 pie--2 card--1 card--1"
+                    "pie--2 pie--2 pie--2 pie--2 card--2 card--2"
+                    "bar    bar    bar    column column  column";
+
+                .pie--2 {
+                    h2 {
+                        --font-size--heading: 4.8rem;
+                    }
+
+                    .content {
+                        width: 36rem;
+	                    height: 36rem;
                     }
                 }
             }
