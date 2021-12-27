@@ -8,9 +8,10 @@ import {PipesModule} from '../pipes/pipes.module';
 import {RouterModule} from '@angular/router';
 import {AbstractShapesSorterComponent} from './abstract-shapes-sorter/abstract-shapes-sorter.component';
 import {DuolingoWordPuzzleComponent} from './duolingo-word-puzzle/duolingo-word-puzzle.component';
+import {ChartsGridComponent} from './charts-grid/charts-grid.component';
 
 @NgModule({
-    declarations: [HomeComponent, AbstractShapesSorterComponent, DuolingoWordPuzzleComponent],
+    declarations: [HomeComponent, AbstractShapesSorterComponent, DuolingoWordPuzzleComponent, ChartsGridComponent],
     imports: [CommonModule, PipesModule, ComponentsModule, RouterModule],
 })
 export class PagesModule {}

@@ -9,5 +9,6 @@ export class HomeComponent {
     public demos: {title: string; link: string}[] = [
         {title: 'Abstract Shapes Sorter', link: 'abstract-shapes-sorter'},
         {title: 'Duolingo Word puzzle', link: 'duolingo-word-puzzle'},
+        {title: 'Charts Grid', link: 'charts-grid'},
     ];
 }
