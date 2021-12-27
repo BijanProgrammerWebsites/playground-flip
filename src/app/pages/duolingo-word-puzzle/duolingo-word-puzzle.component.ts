@@ -6,40 +6,48 @@ import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core
     styleUrls: ['./duolingo-word-puzzle.component.scss'],
 })
 export class DuolingoWordPuzzleComponent {
-    private static readonly ANIMATION_DURATION: number = 500;
+    private static readonly ANIMATION_DURATION: number = 250;
     private static readonly EASING: string = 'ease-in-out';
 
     @ViewChild('top') private top!: ElementRef<HTMLElement>;
     @ViewChild('bottom') private bottom!: ElementRef<HTMLElement>;
 
     public topWords: {id: number; content: string; isVisible: boolean}[] = [];
-    public words: {id: number; content: string; isVisible: boolean}[] = [
-        {id: 0, content: 'Hello', isVisible: true},
-        {id: 1, content: ',', isVisible: true},
-        {id: 2, content: 'friend', isVisible: true},
-        {id: 3, content: '!', isVisible: true},
-    ];
+    public words: {id: number; content: string; isVisible: boolean}[] = [];
 
     private isPlaying: boolean = false;
+    private endedTransitionsCount: number = 0;
 
-    public constructor(private changeDetectorRef: ChangeDetectorRef) {}
+    public constructor(private changeDetectorRef: ChangeDetectorRef) {
+        const words = 'Hello, friend! My name is Bijan and I am a programmer.'.split(' ').map((x, i) => ({
+            id: i,
+            content: x,
+            isVisible: true,
+        }));
+        words.sort(() => Math.random() - 0.5);
+
+        this.words = words;
+    }
 
     public buttonClickHandler(e: MouseEvent): void {
         this.flip(e.target as HTMLElement);
     }
 
     private flip(element: HTMLElement): void {
-        // if (this.isPlaying) return;
-        this.isPlaying = true;
+        if (this.isPlaying) return;
 
-        const first = element.getBoundingClientRect();
+        this.isPlaying = true;
+        this.endedTransitionsCount = 0;
+
+        const {domRects: first} = this.getBoundingClientRects(element);
 
         const duplicateElement = this.move(element);
         this.changeDetectorRef.detectChanges();
 
-        const last = duplicateElement.getBoundingClientRect();
+        const {domRects: last, buttons} = this.getBoundingClientRects(duplicateElement);
 
-        this.play(duplicateElement, first, last);
+        const elements = [duplicateElement, ...buttons];
+        this.play(elements, first, last);
     }
 
     private move(element: HTMLElement): HTMLElement {
@@ -64,15 +72,36 @@ export class DuolingoWordPuzzleComponent {
         return this.bottom.nativeElement.querySelector(`[data-id="${id}"]`)! as HTMLElement;
     }
 
-    private play(element: HTMLElement, first: DOMRect, last: DOMRect): void {
-        const x = first.left - last.left;
-        const y = first.top - last.top;
+    private play(elements: HTMLElement[], first: DOMRect[], last: DOMRect[]): void {
+        const invert: {x: number; y: number}[] = [];
+        for (let i = 0; i < first.length; i++)
+            invert.push({x: first[i].left - last[i].left, y: first[i].top - last[i].top});
 
-        const animation = element.animate([{transform: `translate(${x}px, ${y}px)`}, {transform: 'translate(0)'}], {
-            duration: DuolingoWordPuzzleComponent.ANIMATION_DURATION,
-            easing: DuolingoWordPuzzleComponent.EASING,
+        elements.forEach((element, i) => {
+            const animation = element.animate(
+                [{transform: `translate(${invert[i].x}px, ${invert[i].y}px)`}, {transform: 'translate(0)'}],
+                {
+                    duration: DuolingoWordPuzzleComponent.ANIMATION_DURATION,
+                    easing: DuolingoWordPuzzleComponent.EASING,
+                }
+            );
+
+            animation.addEventListener('finish', () => this.transitionEnd(elements.length));
         });
+    }
 
-        animation.addEventListener('finish', () => (this.isPlaying = false));
+    private getBoundingClientRects(element: HTMLElement): {domRects: DOMRect[]; buttons: HTMLElement[]} {
+        const buttons = Array.from(this.top.nativeElement.querySelectorAll('button'));
+        const buttonsExceptElement = buttons.filter((x) => x.innerText !== element.innerText);
+
+        const domRects: DOMRect[] = [element.getBoundingClientRect()];
+        domRects.push(...buttonsExceptElement.map((x) => x.getBoundingClientRect()));
+
+        return {domRects, buttons: buttonsExceptElement};
+    }
+
+    private transitionEnd(totalCount: number): void {
+        this.endedTransitionsCount++;
+        if (this.endedTransitionsCount === totalCount) this.isPlaying = false;
     }
 }

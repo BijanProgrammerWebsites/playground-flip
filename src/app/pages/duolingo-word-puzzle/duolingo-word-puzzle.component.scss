@@ -5,57 +5,68 @@
 
     .body {
         --hue: 200;
-        --color--dark: hsl(var(--hue), 100%, 10%);
-        --color--midtone: hsl(var(--hue), 100%, 14%);
-        --color--light: hsl(var(--hue), 100%, 90%);
-        --color--disabled: hsl(var(--hue), 100%, 20%);
+        --color--body-background: hsl(var(--hue), 60%, 5%);
+        --color--word-background: hsl(var(--hue), 60%, 8%);
+        --color--word-foreground: hsl(var(--hue), 60%, 90%);
+        --color--disabled: hsl(var(--hue), 60%, 10%);
 
-        background-color: var(--color--midtone);
-        color: var(--color--light);
+        background-color: var(--color--body-background);
+        color: var(--color--word-foreground);
 
         display: grid;
         place-items: center;
 
         height: 100%;
 
+        padding: var(--shell--padding) var(--full-width-padding-inline);
+
         .box {
-            width: 40rem;
+	        display: flex;
+	        flex-direction: column;
+	        gap: 2rem;
+	        
+            width: 100%;
+            max-width: 48rem;
 
             padding: 2rem;
 
-            border: 2px solid var(--color--dark);
+            border: 2px solid var(--color--word-background);
+	        border-radius: 0.5rem;
 
             .top,
             .bottom {
                 display: flex;
+                flex-wrap: wrap;
                 align-items: flex-start;
+                align-content: flex-start;
                 gap: 1rem;
 
                 button {
-                    background-color: var(--color--dark);
-                    color: var(--color--light);
+                    background-color: var(--color--word-background);
+                    color: var(--color--word-foreground);
 
                     padding: 0.5rem 1rem;
 
                     border-radius: 0.3rem;
-	                
+
                     &.hidden {
                         background-color: var(--color--disabled);
-	                    color: transparent;
+                        color: transparent;
 
                         cursor: inherit;
-	                    
-	                    pointer-events: none;
-	                    user-select: none;
+
+                        pointer-events: none;
+                        user-select: none;
                     }
                 }
             }
 
             .top {
-                min-height: 20rem;
+                min-height: 10rem;
             }
 
             .bottom {
+                justify-content: center;
             }
         }
     }
