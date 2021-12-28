@@ -27,45 +27,70 @@
                 font-size: 2.4rem;
 
                 &.SQUARE {
+                    background-color: var(--background-color);
+                    color: var(--color);
+
+                    border-radius: 0.5rem;
+                }
+
+                &.DIAMOND {
+	                color: var(--color);
+	                
+                    position: relative;
+	                
+                    &::before {
+                        content: '';
+
+                        background-color: var(--background-color);
+                        color: var(--color);
+
+                        position: absolute;
+                        z-index: -1;
+
+                        width: 71%;
+                        aspect-ratio: 1 / 1;
+
+                        border-radius: 0.5rem;
+
+                        transform: rotate(45deg);
+                    }
                 }
 
                 &.CIRCLE {
+                    background-color: var(--background-color);
+                    color: var(--color);
+
                     border-radius: 999rem;
                 }
 
                 &.RED {
-                    background-color: hsl(0, 90%, 40%);
-                    color: hsl(0, 0%, 98%);
+                    --background-color: #fc5c65;
+                    --color: hsl(0, 0%, 10%);
                 }
 
                 &.ORANGE {
-                    background-color: hsl(36, 100%, 50%);
-                    color: hsl(0, 0%, 10%);
+                    --background-color: #fd9644;
+                    --color: hsl(0, 0%, 10%);
                 }
 
                 &.YELLOW {
-                    background-color: hsl(60, 100%, 50%);
-                    color: hsl(0, 0%, 10%);
+                    --background-color: #fed330;
+                    --color: hsl(0, 0%, 10%);
                 }
 
                 &.GREEN {
-                    background-color: hsl(120, 100%, 60%);
-                    color: hsl(0, 0%, 10%);
-                }
-
-                &.CYAN {
-                    background-color: hsl(180, 100%, 50%);
-                    color: hsl(0, 0%, 10%);
+                    --background-color: #26de81;
+                    --color: hsl(0, 0%, 10%);
                 }
 
                 &.BLUE {
-                    background-color: hsl(220, 90%, 50%);
-                    color: hsl(0, 0%, 98%);
+                    --background-color: #45aaf2;
+                    --color: hsl(0, 0%, 10%);
                 }
 
                 &.PURPLE {
-                    background-color: hsl(270, 100%, 50%);
-                    color: hsl(0, 0%, 98%);
+                    --background-color: #a55eea;
+                    --color: hsl(0, 0%, 10%);
                 }
             }
         }

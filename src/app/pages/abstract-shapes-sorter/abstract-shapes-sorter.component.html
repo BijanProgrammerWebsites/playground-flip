@@ -12,7 +12,11 @@
     <section>
         <h2>Shapes:</h2>
         <div class="shapes">
-            <div *ngFor="let shape of shapes" class="shape" [ngClass]="[shape.variant, shape.color]">
+            <div
+                *ngFor="let shape of shapes"
+                class="shape"
+                [ngClass]="[ShapeVariant[shape.variant], ShapeColor[shape.color]]"
+            >
                 {{ shape.value }}
             </div>
         </div>

@@ -1,13 +1,14 @@
 import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
 
 interface Shape {
-    variant: ShapeVariant;
-    color: ShapeColor;
+    variant: number;
+    color: number;
     value: number;
 }
 
 enum ShapeVariant {
     SQUARE,
+    DIAMOND,
     CIRCLE,
 }
 
@@ -16,7 +17,6 @@ enum ShapeColor {
     ORANGE,
     YELLOW,
     GREEN,
-    CYAN,
     BLUE,
     PURPLE,
 }
@@ -27,9 +27,12 @@ enum ShapeColor {
     styleUrls: ['./abstract-shapes-sorter.component.scss'],
 })
 export class AbstractShapesSorterComponent {
+    public ShapeVariant = ShapeVariant;
+    public ShapeColor = ShapeColor;
+
     private static readonly SHAPES_COUNT: number = 50;
     private static readonly ANIMATION_DURATION: number = 1000;
-    private static readonly EASING: string = 'cubic-bezier(0.68, -0.55, 0.27, 1.55)';
+    private static readonly EASING: string = 'cubic-bezier(0.7, -0.4, 0.3, 1.4)';
 
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
@@ -50,13 +53,13 @@ export class AbstractShapesSorterComponent {
 
     public shapeButtonClickHandler(): void {
         this.flip(() => {
-            this.shapes.sort((a, b) => a.variant.toString().localeCompare(b.variant.toString()));
+            this.shapes.sort((a, b) => +a.variant - +b.variant);
         });
     }
 
     public colorButtonClickHandler(): void {
         this.flip(() => {
-            this.shapes.sort((a, b) => a.color.toString().localeCompare(b.color.toString()));
+            this.shapes.sort((a, b) => +a.color - +b.color);
         });
     }
 
@@ -90,10 +93,8 @@ export class AbstractShapesSorterComponent {
         this.shapes = [];
 
         for (let i = 0; i < AbstractShapesSorterComponent.SHAPES_COUNT; i++) {
-            const variant = Object.values(ShapeVariant)[
-                AbstractShapesSorterComponent.generateRandomIndex(2)
-            ] as ShapeVariant;
-            const color = Object.values(ShapeColor)[AbstractShapesSorterComponent.generateRandomIndex(7)] as ShapeColor;
+            const variant = AbstractShapesSorterComponent.generateRandomIndex(3);
+            const color = AbstractShapesSorterComponent.generateRandomIndex(6);
 
             this.shapes.push({variant, color, value: i + 1});
         }
