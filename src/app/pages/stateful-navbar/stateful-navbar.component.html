@@ -1,0 +1,38 @@
+<div class="body">
+    <nav
+        #nav
+        [style.--animation-duration]="ANIMATION_DURATION / 1000 + 's'"
+        [style.--animation-easing]="ANIMATION_EASING"
+    >
+        <div class="background"></div>
+
+        <div class="indicator">
+            <div class="before"></div>
+            <div class="middle"></div>
+            <div class="after"></div>
+        </div>
+
+        <ul>
+            <li class="active" (click)="navigationClickHandler($event)">
+                <div class="icon"><icon-home></icon-home></div>
+                <div class="text">Home</div>
+            </li>
+            <li (click)="navigationClickHandler($event)">
+                <div class="icon"><icon-notifications></icon-notifications></div>
+                <div class="text">Notifications</div>
+            </li>
+            <li (click)="navigationClickHandler($event)">
+                <div class="icon"><icon-widgets></icon-widgets></div>
+                <div class="text">Widgets</div>
+            </li>
+            <li (click)="navigationClickHandler($event)">
+                <div class="icon"><icon-favorites></icon-favorites></div>
+                <div class="text">Favorites</div>
+            </li>
+            <li (click)="navigationClickHandler($event)">
+                <div class="icon"><icon-history></icon-history></div>
+                <div class="text">History</div>
+            </li>
+        </ul>
+    </nav>
+</div>

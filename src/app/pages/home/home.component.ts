@@ -10,5 +10,6 @@ export class HomeComponent {
         {title: 'Abstract Shapes Sorter', link: 'abstract-shapes-sorter'},
         {title: 'Duolingo Word puzzle', link: 'duolingo-word-puzzle'},
         {title: 'Charts Grid', link: 'charts-grid'},
+        {title: 'Stateful Navbar', link: 'stateful-navbar'},
     ];
 }

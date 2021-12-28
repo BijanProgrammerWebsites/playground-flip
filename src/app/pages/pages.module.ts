@@ -9,9 +9,17 @@ import {RouterModule} from '@angular/router';
 import {AbstractShapesSorterComponent} from './abstract-shapes-sorter/abstract-shapes-sorter.component';
 import {DuolingoWordPuzzleComponent} from './duolingo-word-puzzle/duolingo-word-puzzle.component';
 import {ChartsGridComponent} from './charts-grid/charts-grid.component';
+import {StatefulNavbarComponent} from './stateful-navbar/stateful-navbar.component';
+import {IconsModule} from '../icons/icons.module';
 
 @NgModule({
-    declarations: [HomeComponent, AbstractShapesSorterComponent, DuolingoWordPuzzleComponent, ChartsGridComponent],
-    imports: [CommonModule, PipesModule, ComponentsModule, RouterModule],
+    declarations: [
+        HomeComponent,
+        AbstractShapesSorterComponent,
+        DuolingoWordPuzzleComponent,
+        ChartsGridComponent,
+        StatefulNavbarComponent,
+    ],
+    imports: [CommonModule, PipesModule, ComponentsModule, RouterModule, IconsModule],
 })
 export class PagesModule {}
