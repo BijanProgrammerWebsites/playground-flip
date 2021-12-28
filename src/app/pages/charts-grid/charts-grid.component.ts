@@ -6,8 +6,8 @@ import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core
     styleUrls: ['./charts-grid.component.scss'],
 })
 export class ChartsGridComponent {
-    private static readonly ANIMATION_DURATION: number = 300;
-    private static readonly EASING: string = 'ease-in-out';
+    private readonly ANIMATION_DURATION: number = 300;
+    private readonly EASING: string = 'ease-in-out';
 
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
@@ -61,8 +61,8 @@ export class ChartsGridComponent {
             const transform = `${translate} ${scale}`;
 
             const animation = element.animate([{transform}, {transform: 'translate(0) scale(1)'}], {
-                duration: ChartsGridComponent.ANIMATION_DURATION,
-                easing: ChartsGridComponent.EASING,
+                duration: this.ANIMATION_DURATION,
+                easing: this.EASING,
             });
 
             animation.addEventListener('finish', this.transitionEnd.bind(this));

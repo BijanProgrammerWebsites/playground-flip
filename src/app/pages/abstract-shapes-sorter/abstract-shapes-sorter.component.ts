@@ -30,9 +30,9 @@ export class AbstractShapesSorterComponent {
     public ShapeVariant = ShapeVariant;
     public ShapeColor = ShapeColor;
 
-    private static readonly SHAPES_COUNT: number = 50;
-    private static readonly ANIMATION_DURATION: number = 1000;
-    private static readonly EASING: string = 'cubic-bezier(0.7, -0.4, 0.3, 1.4)';
+    private readonly SHAPES_COUNT: number = 50;
+    private readonly ANIMATION_DURATION: number = 1000;
+    private readonly EASING: string = 'cubic-bezier(0.7, -0.4, 0.3, 1.4)';
 
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
@@ -85,16 +85,16 @@ export class AbstractShapesSorterComponent {
         this.play(first, last);
     }
 
-    private static generateRandomIndex(length: number = AbstractShapesSorterComponent.SHAPES_COUNT): number {
+    private generateRandomIndex(length: number = this.SHAPES_COUNT): number {
         return Math.floor(Math.random() * length);
     }
 
     private initShapes(): void {
         this.shapes = [];
 
-        for (let i = 0; i < AbstractShapesSorterComponent.SHAPES_COUNT; i++) {
-            const variant = AbstractShapesSorterComponent.generateRandomIndex(3);
-            const color = AbstractShapesSorterComponent.generateRandomIndex(6);
+        for (let i = 0; i < this.SHAPES_COUNT; i++) {
+            const variant = this.generateRandomIndex(3);
+            const color = this.generateRandomIndex(6);
 
             this.shapes.push({variant, color, value: i + 1});
         }
@@ -102,7 +102,7 @@ export class AbstractShapesSorterComponent {
 
     private play(first: {[key: number]: DOMRect}, last: {[key: number]: DOMRect}): void {
         const invert: {[key: number]: {x: number; y: number}} = [];
-        for (let i = 1; i <= AbstractShapesSorterComponent.SHAPES_COUNT; i++) {
+        for (let i = 1; i <= this.SHAPES_COUNT; i++) {
             invert[i] = {
                 x: first[i].left - last[i].left,
                 y: first[i].top - last[i].top,
@@ -116,8 +116,8 @@ export class AbstractShapesSorterComponent {
             const animation = element.animate(
                 [{transform: `translate(${invert[value].x}px, ${invert[value].y}px)`}, {transform: 'translate(0)'}],
                 {
-                    duration: AbstractShapesSorterComponent.ANIMATION_DURATION,
-                    easing: AbstractShapesSorterComponent.EASING,
+                    duration: this.ANIMATION_DURATION,
+                    easing: this.EASING,
                 }
             );
 
@@ -138,7 +138,7 @@ export class AbstractShapesSorterComponent {
 
     private transitionEnd(): void {
         this.endedTransitionsCount++;
-        if (this.endedTransitionsCount === AbstractShapesSorterComponent.SHAPES_COUNT) this.isPlaying = false;
+        if (this.endedTransitionsCount === this.SHAPES_COUNT) this.isPlaying = false;
     }
 
     private shapeElements(): HTMLElement[] {

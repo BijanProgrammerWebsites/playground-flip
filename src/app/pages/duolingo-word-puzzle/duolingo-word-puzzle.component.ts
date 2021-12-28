@@ -6,8 +6,8 @@ import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core
     styleUrls: ['./duolingo-word-puzzle.component.scss'],
 })
 export class DuolingoWordPuzzleComponent {
-    private static readonly ANIMATION_DURATION: number = 250;
-    private static readonly EASING: string = 'ease-in-out';
+    private readonly ANIMATION_DURATION: number = 250;
+    private readonly EASING: string = 'ease-in-out';
 
     @ViewChild('top') private top!: ElementRef<HTMLElement>;
     @ViewChild('bottom') private bottom!: ElementRef<HTMLElement>;
@@ -81,8 +81,8 @@ export class DuolingoWordPuzzleComponent {
             const animation = element.animate(
                 [{transform: `translate(${invert[i].x}px, ${invert[i].y}px)`}, {transform: 'translate(0)'}],
                 {
-                    duration: DuolingoWordPuzzleComponent.ANIMATION_DURATION,
-                    easing: DuolingoWordPuzzleComponent.EASING,
+                    duration: this.ANIMATION_DURATION,
+                    easing: this.EASING,
                 }
             );
 
