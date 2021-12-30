@@ -12,6 +12,8 @@ export class StatefulNavbarComponent implements AfterViewInit {
 
     @ViewChild('nav') private nav!: ElementRef<HTMLElement>;
 
+    private isPlaying: boolean = false;
+
     public constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
     public ngAfterViewInit(): void {
@@ -20,16 +22,24 @@ export class StatefulNavbarComponent implements AfterViewInit {
     }
 
     public async navigationClickHandler(e: MouseEvent): Promise<void> {
+        if (this.isPlaying) return;
+
         const willBeInactiveElement: HTMLElement = this.nav.nativeElement.querySelector('.active')!;
+        const willBeActiveElement = (e.target as HTMLElement).closest('li')!;
+        if (willBeInactiveElement === willBeActiveElement) return;
+
+        this.isPlaying = true;
+
         await this.flip(willBeInactiveElement, () => {
             willBeInactiveElement.className = 'will-be-inactive';
         });
 
-        const willBeActiveElement = (e.target as HTMLElement).closest('li')!;
         await this.flip(willBeActiveElement, () => {
             willBeInactiveElement.className = '';
             willBeActiveElement.className = 'active';
         });
+
+        this.isPlaying = false;
     }
 
     private updateIndicatorSizeAndPosition(referenceElement: HTMLElement): void {
