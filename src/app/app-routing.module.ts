@@ -6,6 +6,7 @@ import {AbstractShapesSorterComponent} from './pages/abstract-shapes-sorter/abst
 import {DuolingoWordPuzzleComponent} from './pages/duolingo-word-puzzle/duolingo-word-puzzle.component';
 import {ChartsGridComponent} from './pages/charts-grid/charts-grid.component';
 import {StatefulNavbarComponent} from './pages/stateful-navbar/stateful-navbar.component';
+import {AbstractFullscreenPostComponent} from './pages/abstract-fullscreen-post/abstract-fullscreen-post.component';
 
 const routes: Routes = [
     {path: '', pathMatch: 'full', component: HomeComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
     {path: 'duolingo-word-puzzle', component: DuolingoWordPuzzleComponent},
     {path: 'charts-grid', component: ChartsGridComponent},
     {path: 'stateful-navbar', component: StatefulNavbarComponent},
+    {path: 'abstract-fullscreen-post', component: AbstractFullscreenPostComponent},
     {path: '*', redirectTo: ''},
 ];
 

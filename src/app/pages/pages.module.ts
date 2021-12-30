@@ -11,6 +11,7 @@ import {DuolingoWordPuzzleComponent} from './duolingo-word-puzzle/duolingo-word-
 import {ChartsGridComponent} from './charts-grid/charts-grid.component';
 import {StatefulNavbarComponent} from './stateful-navbar/stateful-navbar.component';
 import {IconsModule} from '../icons/icons.module';
+import {AbstractFullscreenPostComponent} from './abstract-fullscreen-post/abstract-fullscreen-post.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import {IconsModule} from '../icons/icons.module';
         DuolingoWordPuzzleComponent,
         ChartsGridComponent,
         StatefulNavbarComponent,
+        AbstractFullscreenPostComponent,
     ],
     imports: [CommonModule, PipesModule, ComponentsModule, RouterModule, IconsModule],
 })

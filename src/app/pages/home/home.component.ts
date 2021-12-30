@@ -11,5 +11,6 @@ export class HomeComponent {
         {title: 'Duolingo Word puzzle', link: 'duolingo-word-puzzle'},
         {title: 'Charts Grid', link: 'charts-grid'},
         {title: 'Stateful Navbar', link: 'stateful-navbar'},
+        {title: 'Abstract Fullscreen Post', link: 'abstract-fullscreen-post'},
     ];
 }
