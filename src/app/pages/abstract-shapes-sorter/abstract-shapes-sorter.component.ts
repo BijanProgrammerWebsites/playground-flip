@@ -32,7 +32,7 @@ export class AbstractShapesSorterComponent {
 
     private readonly SHAPES_COUNT: number = 50;
     private readonly ANIMATION_DURATION: number = 1000;
-    private readonly EASING: string = 'cubic-bezier(0.7, -0.4, 0.3, 1.4)';
+    private readonly ANIMATION_EASING: string = 'cubic-bezier(0.7, -0.4, 0.3, 1.4)';
 
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
@@ -75,12 +75,12 @@ export class AbstractShapesSorterComponent {
         this.isPlaying = true;
         this.endedTransitionsCount = 0;
 
-        const first = this.getBoundingClientRects();
+        const first = this.generateDomRects();
 
         callback();
         this.changeDetectorRef.detectChanges();
 
-        const last = this.getBoundingClientRects();
+        const last = this.generateDomRects();
 
         this.play(first, last);
     }
@@ -117,7 +117,7 @@ export class AbstractShapesSorterComponent {
                 [{transform: `translate(${invert[value].x}px, ${invert[value].y}px)`}, {transform: 'translate(0)'}],
                 {
                     duration: this.ANIMATION_DURATION,
-                    easing: this.EASING,
+                    easing: this.ANIMATION_EASING,
                 }
             );
 
@@ -125,7 +125,7 @@ export class AbstractShapesSorterComponent {
         });
     }
 
-    private getBoundingClientRects(): {[key: number]: DOMRect} {
+    private generateDomRects(): {[key: number]: DOMRect} {
         const elements = this.shapeElements();
 
         const result: {[key: number]: DOMRect} = {};

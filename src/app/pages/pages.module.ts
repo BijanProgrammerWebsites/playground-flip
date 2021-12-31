@@ -12,6 +12,7 @@ import {ChartsGridComponent} from './charts-grid/charts-grid.component';
 import {StatefulNavbarComponent} from './stateful-navbar/stateful-navbar.component';
 import {IconsModule} from '../icons/icons.module';
 import {AbstractFullscreenPostComponent} from './abstract-fullscreen-post/abstract-fullscreen-post.component';
+import {AbstractStackingCardsComponent} from './abstract-stacking-cards/abstract-stacking-cards.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import {AbstractFullscreenPostComponent} from './abstract-fullscreen-post/abstra
         ChartsGridComponent,
         StatefulNavbarComponent,
         AbstractFullscreenPostComponent,
+        AbstractStackingCardsComponent,
     ],
     imports: [CommonModule, PipesModule, ComponentsModule, RouterModule, IconsModule],
 })

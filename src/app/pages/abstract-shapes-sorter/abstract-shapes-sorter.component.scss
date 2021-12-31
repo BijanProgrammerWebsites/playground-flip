@@ -3,8 +3,7 @@
     flex-direction: column;
     gap: 4rem;
 
-    padding-inline: var(--full-width-padding-inline);
-    padding-block: var(--shell--padding);
+    padding: var(--shell--padding) var(--full-width-padding-inline);
 
     section {
         display: flex;
@@ -34,10 +33,10 @@
                 }
 
                 &.DIAMOND {
-	                color: var(--color);
-	                
+                    color: var(--color);
+
                     position: relative;
-	                
+
                     &::before {
                         content: '';
 

@@ -7,7 +7,7 @@ import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core
 })
 export class DuolingoWordPuzzleComponent {
     private readonly ANIMATION_DURATION: number = 250;
-    private readonly EASING: string = 'ease-in-out';
+    private readonly ANIMATION_EASING: string = 'ease-in-out';
 
     @ViewChild('top') private top!: ElementRef<HTMLElement>;
     @ViewChild('bottom') private bottom!: ElementRef<HTMLElement>;
@@ -39,12 +39,12 @@ export class DuolingoWordPuzzleComponent {
         this.isPlaying = true;
         this.endedTransitionsCount = 0;
 
-        const {domRects: first} = this.getBoundingClientRects(element);
+        const {domRects: first} = this.generateDomRects(element);
 
         const duplicateElement = this.move(element);
         this.changeDetectorRef.detectChanges();
 
-        const {domRects: last, buttons} = this.getBoundingClientRects(duplicateElement);
+        const {domRects: last, buttons} = this.generateDomRects(duplicateElement);
 
         const elements = [duplicateElement, ...buttons];
         this.play(elements, first, last);
@@ -82,7 +82,7 @@ export class DuolingoWordPuzzleComponent {
                 [{transform: `translate(${invert[i].x}px, ${invert[i].y}px)`}, {transform: 'translate(0)'}],
                 {
                     duration: this.ANIMATION_DURATION,
-                    easing: this.EASING,
+                    easing: this.ANIMATION_EASING,
                 }
             );
 
@@ -90,7 +90,7 @@ export class DuolingoWordPuzzleComponent {
         });
     }
 
-    private getBoundingClientRects(element: HTMLElement): {domRects: DOMRect[]; buttons: HTMLElement[]} {
+    private generateDomRects(element: HTMLElement): {domRects: DOMRect[]; buttons: HTMLElement[]} {
         const buttons = Array.from(this.top.nativeElement.querySelectorAll('button'));
         const buttonsExceptElement = buttons.filter((x) => x.innerText !== element.innerText);
 

@@ -1,0 +1,118 @@
+:host {
+    flex: 1;
+
+    height: 0;
+
+    .body {
+        --color--body: #c7ecee;
+        --color--container: #dff9fb;
+        --color--card--1: #7ed6df;
+        --color--card--2: #6ab04c;
+        --color--card--3: #f9ca24;
+        --color--card--4: #f0932b;
+        --color--card--5: #eb4d4b;
+
+        background-color: var(--color--body);
+
+        display: grid;
+        align-items: flex-start;
+        justify-items: center;
+
+        height: 100%;
+
+        padding: var(--shell--padding) var(--full-width-padding-inline);
+
+        .container {
+            position: relative;
+            isolation: isolate;
+
+            width: 100%;
+            max-width: 40rem;
+
+            padding: 2rem;
+
+            cursor: pointer;
+
+            .background {
+                background-color: var(--color--container);
+                box-shadow: var(--box-shadow--subtle);
+
+                position: absolute;
+                inset: 0;
+                z-index: -1;
+
+                transform-origin: top left;
+            }
+
+            .cards {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 2rem;
+
+                .card {
+                    box-shadow: var(--box-shadow--subtle);
+
+                    width: 100%;
+                    height: 10rem;
+
+                    transform-origin: top left;
+
+                    @for $i from 1 to 5 + 1 {
+                        &--#{$i} {
+                            background-color: var(--color--card--#{$i});
+	
+	                        z-index: (5 + 1) - $i;
+                        }
+                    }
+
+                    &:nth-of-type(2) {
+                        height: 8rem;
+                    }
+
+                    &:nth-of-type(3) {
+                        height: 16rem;
+                    }
+
+                    &:nth-of-type(5) {
+                        height: 12rem;
+                    }
+                }
+            }
+
+            &--stacked {
+                .cards {
+                    position: relative;
+
+                    gap: 0.2rem;
+
+                    .card {
+                        box-shadow: unset;
+
+                        @for $i from 1 to 5 + 1 {
+                            &--#{$i} {
+                                bottom: #{-0.2 * ($i - 1)}rem;
+
+                                width: #{100 - ($i - 1)}#{'%'};
+                            }
+                        }
+
+                        &:first-of-type {
+                            position: relative;
+                        }
+
+                        &:not(:first-of-type) {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+
+                            height: 80%;
+
+                            margin: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -7,7 +7,7 @@ import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core
 })
 export class ChartsGridComponent {
     private readonly ANIMATION_DURATION: number = 300;
-    private readonly EASING: string = 'ease-in-out';
+    private readonly ANIMATION_EASING: string = 'ease-in-out';
 
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
@@ -30,12 +30,12 @@ export class ChartsGridComponent {
         this.isPlaying = true;
         this.endedTransitionsCount = 0;
 
-        const first = this.getBoundingClientRects();
+        const first = this.generateDomRects();
 
         callback();
         this.changeDetectorRef.detectChanges();
 
-        const last = this.getBoundingClientRects();
+        const last = this.generateDomRects();
 
         this.play(first, last);
     }
@@ -62,14 +62,14 @@ export class ChartsGridComponent {
 
             const animation = element.animate([{transform}, {transform: 'translate(0) scale(1)'}], {
                 duration: this.ANIMATION_DURATION,
-                easing: this.EASING,
+                easing: this.ANIMATION_EASING,
             });
 
             animation.addEventListener('finish', this.transitionEnd.bind(this));
         });
     }
 
-    private getBoundingClientRects(): {[key: string]: DOMRect} {
+    private generateDomRects(): {[key: string]: DOMRect} {
         const elements = this.chartElements();
 
         const result: {[key: string]: DOMRect} = {};
