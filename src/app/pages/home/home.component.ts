@@ -13,5 +13,6 @@ export class HomeComponent {
         {title: 'Stateful Navbar', link: 'stateful-navbar'},
         {title: 'Abstract Fullscreen Post', link: 'abstract-fullscreen-post'},
         {title: 'Abstract Stacking Cards', link: 'abstract-stacking-cards'},
+        {title: 'Tile or List View', link: 'tile-or-list-view'},
     ];
 }

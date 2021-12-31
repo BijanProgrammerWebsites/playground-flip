@@ -71,6 +71,9 @@
 	--color--footer-background: hsl(var(--primary-hue), 18%, 16%);
 	--color--footer-foreground: var(--color--default-background);
 	
+	--color--card-background: var(--color-gray-90);
+	--color--card-foreground: inherit;
+	
 	--color--placeholder: var(--color-gray-40);
 	
 	--color--border--fade: var(--color-gray-80);
@@ -79,9 +82,6 @@
 	
 	--color--button-disabled-background: var(--color-gray-70);
 	--color--button-disabled-foreground: var(--color--default-foreground);
-	
-	--color--popper-background: var(--color-gray-20);
-	--color--popper-foreground: var(--color--default-background);
 	
 	--color--box-shadow--subtle: hsla(0, 0%, 10%, 12%);
 	--box-shadow--subtle: 0 0.2rem 0.5rem 0 var(--color--box-shadow--subtle);
@@ -98,6 +98,8 @@
 	&.theme--dark {
 		--color--default-background: var(--color-gray-10);
 		--color--default-foreground: var(--color-gray-90);
+		
+		--color--card-background: var(--color-gray-20);
 		
 		--color--border--fade: var(--color-gray-30);
 		

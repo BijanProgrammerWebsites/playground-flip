@@ -1,0 +1,43 @@
+<div class="body">
+    <header>
+        <button [disabled]="isScreenSmall" (click)="toggleViewButtonClickHandler()">
+            <span class="icon">
+                <ng-container *ngIf="isInTileView"><icon-tile-view></icon-tile-view></ng-container>
+                <ng-container *ngIf="!isInTileView"><icon-list-view></icon-list-view></ng-container>
+            </span>
+            <span class="text">{{ isInTileView ? 'Tile View' : 'List View' }}</span>
+        </button>
+
+        <div class="note">
+            <ng-container *ngIf="!isScreenSmall">
+                * You can alternatively click on any of the images to toggle the view.
+            </ng-container>
+            <ng-container *ngIf="isScreenSmall">
+                * You can't use this functionality if your screen is small.
+            </ng-container>
+        </div>
+    </header>
+
+    <main>
+        <div #grid class="grid" [ngClass]="{'list-view': !isInTileView}">
+            <div class="item" *ngFor="let item of TILE_OR_LIST_VIEW_ITEMS">
+                <img [src]="item.image" [alt]="item.name" (click)="toggleViewButtonClickHandler()" />
+                <div class="info">
+                    <div class="background"></div>
+
+                    <div class="label">name</div>
+                    <div class="value">{{ item.name }}</div>
+
+                    <div class="label">category</div>
+                    <div class="value">{{ item.category }}</div>
+
+                    <div class="label">color</div>
+                    <div class="value">{{ item.color }}</div>
+
+                    <div class="label">count</div>
+                    <div class="value">{{ item.count }}</div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

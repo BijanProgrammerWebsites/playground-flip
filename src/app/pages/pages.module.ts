@@ -13,6 +13,7 @@ import {StatefulNavbarComponent} from './stateful-navbar/stateful-navbar.compone
 import {IconsModule} from '../icons/icons.module';
 import {AbstractFullscreenPostComponent} from './abstract-fullscreen-post/abstract-fullscreen-post.component';
 import {AbstractStackingCardsComponent} from './abstract-stacking-cards/abstract-stacking-cards.component';
+import {TileOrListViewComponent} from './tile-or-list-view/tile-or-list-view.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import {AbstractStackingCardsComponent} from './abstract-stacking-cards/abstract
         StatefulNavbarComponent,
         AbstractFullscreenPostComponent,
         AbstractStackingCardsComponent,
+        TileOrListViewComponent,
     ],
     imports: [CommonModule, PipesModule, ComponentsModule, RouterModule, IconsModule],
 })

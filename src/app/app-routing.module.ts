@@ -8,6 +8,7 @@ import {ChartsGridComponent} from './pages/charts-grid/charts-grid.component';
 import {StatefulNavbarComponent} from './pages/stateful-navbar/stateful-navbar.component';
 import {AbstractFullscreenPostComponent} from './pages/abstract-fullscreen-post/abstract-fullscreen-post.component';
 import {AbstractStackingCardsComponent} from './pages/abstract-stacking-cards/abstract-stacking-cards.component';
+import {TileOrListViewComponent} from './pages/tile-or-list-view/tile-or-list-view.component';
 
 const routes: Routes = [
     {path: '', pathMatch: 'full', component: HomeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'stateful-navbar', component: StatefulNavbarComponent},
     {path: 'abstract-fullscreen-post', component: AbstractFullscreenPostComponent},
     {path: 'abstract-stacking-cards', component: AbstractStackingCardsComponent},
+    {path: 'tile-or-list-view', component: TileOrListViewComponent},
     {path: '*', redirectTo: ''},
 ];
 
