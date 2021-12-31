@@ -1,4 +1,5 @@
 import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {FlipService} from '../../services/flip.service';
 
 @Component({
     selector: 'app-abstract-fullscreen-post',
@@ -23,7 +24,20 @@ export class AbstractFullscreenPostComponent {
         this.isPlaying = true;
 
         await this.fadeContent(1, 0);
-        await this.flip();
+
+        const generateDomRects = this.generateDomRects.bind(this);
+        await FlipService.flip(
+            generateDomRects,
+            generateDomRects,
+            () => {
+                this.post.nativeElement.classList.toggle('post--fullscreen');
+                this.changeDetectorRef.detectChanges();
+            },
+            {
+                easing: this.ANIMATION_EASING,
+            }
+        );
+
         await this.fadeContent(0, 1);
 
         this.isPlaying = false;
@@ -41,36 +55,9 @@ export class AbstractFullscreenPostComponent {
         });
     }
 
-    private async flip(): Promise<void> {
-        const first = this.post.nativeElement.getBoundingClientRect();
-
-        this.post.nativeElement.classList.toggle('post--fullscreen');
-        this.changeDetectorRef.detectChanges();
-
-        const last = this.post.nativeElement.getBoundingClientRect();
-
-        await this.play(first, last);
-    }
-
-    private async play(first: DOMRect, last: DOMRect): Promise<void> {
-        const invert = {
-            x: first.left - last.left,
-            y: first.top - last.top,
-            scaleX: first.width / last.width,
-            scaleY: first.height / last.height,
-        };
-
-        const translate = `translate(${invert.x}px, ${invert.y}px)`;
-        const scale = `scale(${invert.scaleX}, ${invert.scaleY})`;
-        const transform = `${translate} ${scale}`;
-
-        const animation = this.post.nativeElement.animate([{transform}, {transform: 'translate(0) scale(1)'}], {
-            duration: this.ANIMATION_DURATION,
-            easing: this.ANIMATION_EASING,
-        });
-
-        await new Promise<void>((resolve) => {
-            animation.addEventListener('finish', () => resolve());
-        });
+    private generateDomRects(): Map<HTMLElement, DOMRect> {
+        return new Map<HTMLElement, DOMRect>([
+            [this.post.nativeElement, this.post.nativeElement.getBoundingClientRect()],
+        ]);
     }
 }

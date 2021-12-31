@@ -32,9 +32,9 @@ export class AbstractStackingCardsComponent {
         const result = new Map<HTMLElement, DOMRect>();
         result.set(this.background.nativeElement, this.background.nativeElement.getBoundingClientRect());
 
-        const cards: HTMLElement[] = Array.from(this.cards.nativeElement.querySelectorAll('.card'));
-        cards.forEach((card) => {
-            result.set(card, card.getBoundingClientRect());
+        const elements: HTMLElement[] = Array.from(this.cards.nativeElement.querySelectorAll('.card'));
+        elements.forEach((element) => {
+            result.set(element, element.getBoundingClientRect());
         });
 
         return result;

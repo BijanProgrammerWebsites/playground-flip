@@ -1,4 +1,5 @@
 import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {FlipService} from '../../services/flip.service';
 
 @Component({
     selector: 'app-charts-grid',
@@ -12,80 +13,41 @@ export class ChartsGridComponent {
     @ViewChild('body') private body!: ElementRef<HTMLElement>;
 
     private isPlaying: boolean = false;
-    private endedTransitionsCount: number = 0;
 
     public constructor(private changeDetectorRef: ChangeDetectorRef) {}
 
-    public chartClickHandler(className: string): void {
-        this.flip(() => {
-            const body = this.body.nativeElement;
-            if (body.classList.contains(className)) body.className = 'body';
-            else body.className = `body ${className}`;
-        });
-    }
-
-    private flip(callback: Function): void {
+    public async chartClickHandler(className: string): Promise<void> {
         if (this.isPlaying) return;
-
         this.isPlaying = true;
-        this.endedTransitionsCount = 0;
 
-        const first = this.generateDomRects();
+        const generateDomRects = this.generateDomRects.bind(this);
+        await FlipService.flip(
+            generateDomRects,
+            generateDomRects,
+            () => {
+                const body = this.body.nativeElement;
+                if (body.classList.contains(className)) body.className = 'body';
+                else body.className = `body ${className}`;
 
-        callback();
-        this.changeDetectorRef.detectChanges();
-
-        const last = this.generateDomRects();
-
-        this.play(first, last);
-    }
-
-    private play(first: {[key: string]: DOMRect}, last: {[key: string]: DOMRect}): void {
-        const invert: {[key: string]: {x: number; y: number; scaleX: number; scaleY: number}} = {};
-
-        for (const key of Object.keys(first)) {
-            invert[key] = {
-                x: first[key].left - last[key].left,
-                y: first[key].top - last[key].top,
-                scaleX: first[key].width / last[key].width,
-                scaleY: first[key].height / last[key].height,
-            };
-        }
-
-        const elements = this.chartElements();
-        elements.forEach((element) => {
-            const key = element.className;
-
-            const translate = `translate(${invert[key].x}px, ${invert[key].y}px)`;
-            const scale = `scale(${invert[key].scaleX}, ${invert[key].scaleY})`;
-            const transform = `${translate} ${scale}`;
-
-            const animation = element.animate([{transform}, {transform: 'translate(0) scale(1)'}], {
+                this.changeDetectorRef.detectChanges();
+            },
+            {
                 duration: this.ANIMATION_DURATION,
                 easing: this.ANIMATION_EASING,
-            });
+            }
+        );
 
-            animation.addEventListener('finish', this.transitionEnd.bind(this));
-        });
+        this.isPlaying = false;
     }
 
-    private generateDomRects(): {[key: string]: DOMRect} {
-        const elements = this.chartElements();
+    private generateDomRects(): Map<HTMLElement, DOMRect> {
+        const result = new Map<HTMLElement, DOMRect>();
 
-        const result: {[key: string]: DOMRect} = {};
+        const elements: HTMLElement[] = Array.from(this.body.nativeElement.querySelectorAll('.charts > div'));
         elements.forEach((element) => {
-            result[element.className] = element.getBoundingClientRect();
+            result.set(element, element.getBoundingClientRect());
         });
 
         return result;
-    }
-
-    private transitionEnd(): void {
-        this.endedTransitionsCount++;
-        if (this.endedTransitionsCount === 6) this.isPlaying = false;
-    }
-
-    private chartElements(): HTMLElement[] {
-        return Array.from(this.body.nativeElement.querySelectorAll('.charts > div'));
     }
 }
