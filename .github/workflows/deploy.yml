@@ -1,27 +1,12 @@
-name: Deployment Workflow
+name: Deploy
 on:
     push:
-        branches: [master]
+        branches: [main]
 
 jobs:
-    deply_job:
-        name: Deploy
-        runs-on: ubuntu-latest
-        steps:
-            - name: Establish a Connection to Server and Update Website
-              uses: appleboy/ssh-action@master
-              with:
-                  host: 130.185.76.173
-                  username: root
-                  key: ${{secrets.SSH_KEY}}
-                  port: 22
-                  script: |
-                      cd /repos/playground-flip
-                      git fetch
-                      git checkout master
-                      git reset --hard HEAD
-                      git pull origin master
-                      npm i
-                      ng build --base-href=/flip/
-                      rm -rf /var/playground/bijanprogrammer.com/html/flip
-                      cp -a dist/flip/. /var/playground/bijanprogrammer.com/html/flip
+    deploy:
+        uses: BijanProgrammerWebsites/hub/.github/workflows/deploy-angular.yml@master
+        with:
+            host: playground.bijanprogrammer.com
+            base-href: /flip/
+            project-name: flip
