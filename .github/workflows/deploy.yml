@@ -11,4 +11,5 @@ jobs:
         with:
             domain: playground.bijanprogrammer.com
             base-href: /flip/
+            project-name: flip
         secrets: inherit
