@@ -1,12 +1,14 @@
 name: Deploy
+
 on:
     push:
         branches: [master]
+    workflow_dispatch:
 
 jobs:
     deploy:
         uses: BijanProgrammerWebsites/hub/.github/workflows/deploy-angular.yml@master
         with:
-            host: playground.bijanprogrammer.com
+            domain: playground.bijanprogrammer.com
             base-href: /flip/
-            project-name: flip
+        secrets: inherit
